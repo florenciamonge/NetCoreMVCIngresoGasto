@@ -1,0 +1,62 @@
+﻿@model IEnumerable<ControlIngresoGasto.Models.Categoria>
+
+@{
+    ViewData["Title"] = "Lista de Categorias";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h1>Lista de categorias</h1>
+
+<p>
+    <a asp-action="Create">Crear nueva categoria</a>
+</p>
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.NombreCategoria)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.tipo)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Estado)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model) {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.NombreCategoria)
+            </td>
+            <td>
+                @if (item.tipo=="IN")
+                {
+                    <p>Ingreso</p>
+                }
+                else
+                {
+                    <p>Gasto</p>
+                }
+            </td>
+            <td>
+                @if(item.Estado==true)
+                {
+                    <p>Activo</p>
+                }
+                else
+                {
+                    <p>Inactivo</p>
+                }
+            </td>
+            <td>
+                <a asp-action="Edit" asp-route-id="@item.Id">Editar</a> |
+                <a asp-action="Details" asp-route-id="@item.Id">Detalle</a> |
+                <a asp-action="Delete" asp-route-id="@item.Id">Eliminar</a>
+            </td>
+        </tr>
+}
+    </tbody>
+</table>
